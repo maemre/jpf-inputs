@@ -1,0 +1,43 @@
+target=binarytrees
+
+native_classpath=${user.home}/lab/jpf/ariane/target/scala-2.12/ariane.jar
+
+# here write your own classpath and un-comment
+classpath=binarytrees
+
+# method to start symbolic execution
+symbolic.method=binarytrees.bottomUpTree(sym)
+# entry point to tracer
+tracer.entryPoint=main
+# depth limit for the symbolic execution
+search.depth_limit = 16
+
+# listener to print information (PCs, test cases) about symbolic run
+
+# Converging ixpoint listener
+# listener=edu.ucsb.cs.jpf.swag.FixpointListener
+# Just discovery, the one in progress report
+# listener=edu.ucsb.cs.ariane.PCListener
+listener+=,edu.ucsb.cs.ariane.collector.CollectorListener
+
+# To see the path conditions
+listener+=,gov.nasa.jpf.symbc.SymbolicListener
+
+############################################################
+# The following JPF options are usually used for SPF as well:
+
+# no state matching
+
+vm.storage.class=nil
+
+# instruct jpf not to stop at first error
+
+search.multiple_errors=true
+
+# symbc options:
+
+# symbolic.dp=choco
+# don't use a solver for now to see all the paths
+symbolic.dp=z3
+symbolic.strings=false #true
+symbolic.lazy=on
