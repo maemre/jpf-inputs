@@ -1,5 +1,3 @@
-package engagement1.lawdb;
-
 import java.util.concurrent.*;
 import java.util.*;
 
@@ -40,7 +38,7 @@ public class BTree
         for (int i = 0; i < n.mKeys.length; ++i) {
             System.out.print(new StringBuilder().append(n.mKeys[i]).append(" : ").toString());
         }
-        System.out.println("");
+        System.out.println();
     }
     
     public BTree() {
@@ -226,7 +224,7 @@ public class BTree
                 }
                 else {
                     int retVal = 0;
-                    retVal = Arrays.binarySearch((Object[])node.fastSearchArray, key);
+                    retVal = Arrays.binarySearch(node.fastSearchArray, key);
                     retVal = (i = retVal * -1 - 1);
                 }
             }
@@ -684,7 +682,7 @@ public class BTree
     void validate() throws Exception {
         final List<Integer> array = this.getKeys(this.mRootNode);
         for (int i = 0; i < array.size() - 1; ++i) {
-            if ((int)array.get(i) >= (int)array.get(i + 1)) {
+            if (array.get(i) >= array.get(i + 1)) {
                 throw new Exception(new StringBuilder().append("B-Tree invalid: ").append(array.get(i)).append(" greater than ").append(array.get(i + 1)).toString());
             }
         }
@@ -726,7 +724,7 @@ public class BTree
         
         public int get(final int index) {
             try {
-                return (int)this.objs.get(index);
+                return this.objs.get(index);
             }
             catch (IndexOutOfBoundsException e) {
                 return new Integer(0);

@@ -1,10 +1,7 @@
-package engagement1.lawdb;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import gov.nasa.jpf.symbc.Debug;
-import sidechannel.multirun.Observable;
 
 public class UDPServerHandler {
 	   
@@ -72,7 +69,7 @@ public class UDPServerHandler {
 			// final DFileHandle fh1 = new DFileHandle("config.security", sys);
 			filestoCheck.add("config.security");
 			final List<Integer> range = this.btree.toList(min, max);
-			if (range.size() <= 0 || !this.restricted.isRestricted((int) range.get(0))) {
+			if (range.size() <= 0 || !this.restricted.isRestricted(range.get(0))) {
 				// final String contents =
 				// DFileHandle.getContents((String[])filestoCheck.toArray((Object[])new
 				// String[0]), sys);
@@ -83,7 +80,7 @@ public class UDPServerHandler {
 			int ind = 0;
 			while (ind < range.size()) {
 				try {
-					final Integer nextkey = (Integer) range.get(ind);
+					final Integer nextkey = range.get(ind);
 					// bos = alloc.directBuffer(4);
 					// bos.writeInt(nextkey);
 					if (this.restricted.isRestricted(nextkey)) {
@@ -104,8 +101,8 @@ public class UDPServerHandler {
 					at.add("lastaccessinfo.log", Integer.toString(nextkey), nextkey);
 					++ind;
 				} catch (RestrictedAccessException rae) {
-					for (Integer getkey = (Integer) range.get(ind); this.restricted.isRestricted(getkey)
-							&& ind < range.size(); getkey = (Integer) range.get(ind)) {
+					for (Integer getkey = range.get(ind); this.restricted.isRestricted(getkey)
+							&& ind < range.size(); getkey = range.get(ind)) {
 						if (sys == null) {
 							sys = new DSystemHandle("127.0.0.1", 6666);
 						}

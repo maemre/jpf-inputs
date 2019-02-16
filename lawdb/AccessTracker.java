@@ -1,8 +1,4 @@
-package engagement1.lawdb;
-
-import java.net.*;
-import java.util.logging.*;
-import java.io.*;
+import java.util.logging.Level;
 
 public class AccessTracker
 {
@@ -33,7 +29,7 @@ public class AccessTracker
         }
         // catch (IOException ex) {
         catch (Exception ex) {
-            Logger.getLogger(AccessTracker.class.getName()).log(Level.SEVERE, (String)null, (Throwable)ex);
+            Logger.getLogger(AccessTracker.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

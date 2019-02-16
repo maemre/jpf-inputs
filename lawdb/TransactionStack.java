@@ -1,5 +1,3 @@
-package engagement1.lawdb;
-
 import java.util.*;
 
 public class TransactionStack
@@ -14,7 +12,7 @@ public class TransactionStack
     public TransactionStack(final BTree btree) {
         this.t_stack = null;
         this.is_active = false;
-        this.t_stack = (Deque<Undo>)new ArrayDeque<Undo>(1000);
+        this.t_stack = new ArrayDeque<Undo>(1000);
         this.btree = btree;
     }
     
@@ -32,7 +30,7 @@ public class TransactionStack
     
     public void rollback() {
         while (this.t_stack.peekLast() != null) {
-            final Undo last = (Undo)this.t_stack.removeLast();
+            final Undo last = this.t_stack.removeLast();
             last.undo();
         }
     }

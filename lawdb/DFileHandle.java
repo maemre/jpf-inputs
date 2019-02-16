@@ -1,5 +1,3 @@
-package engagement1.lawdb;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -41,12 +39,13 @@ public class DFileHandle
        // msg.setData(dto);
         final Socket socket = new Socket();
         socket.setReuseAddress(true);
-        socket.bind((SocketAddress)null);
+        socket.bind(null);
         // socket.connect((SocketAddress)new InetSocketAddress(DSystem.ADDRESS, DSystem.PORT));
         final ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
-        out.writeObject((Object)msg);
+        out.writeObject(msg);
         out.flush();
-        final BufferedReader datafromserver = new BufferedReader((Reader)new InputStreamReader(socket.getInputStream()));
+        final BufferedReader datafromserver = new BufferedReader(
+            new InputStreamReader(socket.getInputStream()));
         String data = "";
         String fromServer;
         while ((fromServer = datafromserver.readLine()) != null && !fromServer.equals("done.")) {
@@ -67,14 +66,14 @@ public class DFileHandle
         if (socket == null) {
             socket = new Socket();
             socket.setReuseAddress(true);
-            socket.bind((SocketAddress)null);
+            socket.bind(null);
             // socket.connect((SocketAddress)new InetSocketAddress(DSystem.ADDRESS, DSystem.PORT));
         }
         out = null;
         if (out == null) {
             out = new ObjectOutputStream(socket.getOutputStream());
         }
-        out.writeObject((Object)msg);
+        out.writeObject(msg);
         final byte[] contentInBytes = this.contents.getBytes();
         final ByteArrayInputStream in = new ByteArrayInputStream(contentInBytes);
         final byte[] bytes = new byte[10240];
@@ -98,7 +97,7 @@ public class DFileHandle
         if (socket == null) {
             socket = new Socket();
             socket.setReuseAddress(true);
-            socket.bind((SocketAddress)null);
+            socket.bind(null);
             // socket.connect((SocketAddress)new InetSocketAddress(DSystem.ADDRESS, DSystem.PORT));
             try {
                 // final FileOutputStream fout = new FileOutputStream(file.getName());
@@ -114,7 +113,7 @@ public class DFileHandle
         if (out == null) {
             out = new ObjectOutputStream(socket.getOutputStream());
         }
-        out.writeObject((Object)msg);
+        out.writeObject(msg);
         final byte[] contentInBytes = this.contents.getBytes();
         final ByteArrayInputStream in = new ByteArrayInputStream(contentInBytes);
         final byte[] bytes = new byte[10240];
@@ -132,7 +131,7 @@ public class DFileHandle
         catch (Exception ex) {}
     }
     
-    public String retrieve() throws IOException {
+    public String retrieve() {
         // final DistributedFile file = new DistributedFile(this.name);
         /// final FileStreamDTO dto = new FileStreamDTO(file, 1);
         final Message msg = new Message();
@@ -152,7 +151,7 @@ public class DFileHandle
         return data;
     }
     
-    public static boolean exists() throws IOException {
+    public static boolean exists() {
         final Message msg = new Message();
         msg.setType(5);
         // final Socket socket = new Socket(DSystem.ADDRESS, DSystem.PORT);

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-package engagement1.lawdb;
-
 import gov.nasa.jpf.symbc.Debug;
 
 public class DriverOrigDataset {

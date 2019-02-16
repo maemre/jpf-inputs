@@ -1,5 +1,3 @@
-package engagement1.lawdb;
-
 import java.util.*;
 
 public class CheckRestrictedID
@@ -11,14 +9,14 @@ public class CheckRestrictedID
     }
     
     public void add(final int id) {
-        this.ids.add((Integer)id);
+        this.ids.add(id);
     }
     
     public boolean isRestricted(final int id) {
-        return this.ids.contains((Object)id);
+        return this.ids.contains(id);
     }
     
     public boolean remove(final Integer key) {
-        return this.ids.remove((Object)key);
+        return this.ids.remove(key);
     }
 }

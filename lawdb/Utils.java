@@ -1,5 +1,3 @@
-package engagement1.lawdb;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -19,15 +17,17 @@ public class Utils
         final PrintWriter outf = new PrintWriter("./dumps/" + bfile);
         final ArrayList<Integer> allKeys = btree.getRange(0, Integer.MAX_VALUE);
         for (final Integer nextkey : allKeys) {
-            outf.println(new StringBuilder().append("ADD:").append((Object)nextkey).append(":").append((Object)nextkey).toString());
-            System.out.println(new StringBuilder().append("ADD:").append((Object)nextkey).append(":").append((Object)nextkey).toString());
+            outf.println(new StringBuilder().append("ADD:").append(nextkey).append(":").append(
+                nextkey).toString());
+            System.out.println(new StringBuilder().append("ADD:").append(nextkey).append(":").append(
+                nextkey).toString());
         }
         outf.flush();
         outf.close();
     }
     
-    public static void restore(final BTree btree, final String bfile, final CheckRestrictedID restricted) throws FileNotFoundException, IOException {
-        final BufferedReader reader = new BufferedReader((Reader)new FileReader("./dumps/" + bfile));
+    public static void restore(final BTree btree, final String bfile, final CheckRestrictedID restricted) throws IOException {
+        final BufferedReader reader = new BufferedReader(new FileReader("./dumps/" + bfile));
         String line = null;
         while ((line = reader.readLine()) != null) {
             final int indexOfKey = line.indexOf("ADD:") + "ADD:".length();
@@ -46,7 +46,9 @@ public class Utils
                 System.out.println("log-" + line);
             }
             else {
-                System.out.println(new StringBuilder().append("ERROR on ").append(key).append(", IDS Must fall in range:").append((Object)UDPServerHandler.IDMIN).append(" to ").append((Object)UDPServerHandler.IDMAX).toString());
+                System.out.println(new StringBuilder().append("ERROR on ").append(key).append(", IDS Must fall in range:").append(
+                    UDPServerHandler.IDMIN).append(" to ").append(
+                    UDPServerHandler.IDMAX).toString());
             }
         }
         reader.close();
